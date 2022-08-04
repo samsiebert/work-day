@@ -1,34 +1,47 @@
 var eventBox = $(".event-box")
 //get current time(hour) using day.js
 let hour = dayjs().hour();
+var events = [];
+var idArr = [];
+$(".event-box").each(function(){
+    idArr.push($(this).attr("id"));
+});
 
 // compare current time with id denoting time in event description box
 var testTime = function() {
-
-    var idArr = [];
-    $(".event-box").each(function(){
-        idArr.push($(this).attr("id"));
-    });
-
-    
     
 
- for (var i = 0; i < idArr.length; i++) {  
-
-    let eventTime = idArr[i];
+let eventTime = $(".event-box").attr("id")
    if (eventTime < hour) {
-        $(".event-box").addClass("past");
+      $(this).addClass("past");
+       console.log("before");
    } else if (eventTime > hour) {
-        $(".event-box").addClass("future");
+    $(this).addClass("future");
+        console.log("after");
    } else {
-        $(".event-box").addClass("present");
+    console.log("during");
+    $(this).addClass("present");
    };
- };
 };
+
+
+
+var load = function() {
+    events = JSON.parse(localStorage.getItem("events"));
+    $("textarea").val(events);
+};
+ 
 
 // save event description typed into textarea
 var save = function() {
-    console.log($("textarea").value);
+    var eventData = $(this).closest.sibling.val();
+console.log(eventDate);
+    localStorage.setItem($)
+    events = [];
+    $("textarea").each(function(){
+        events.push($(this).val());
+    });
+    localStorage.setItem("events", JSON.stringify(events));
 };
 
 // run function to change colors of time blocks 
@@ -39,3 +52,4 @@ $(".saveBtn").click(function(){
     save();
 });
 
+load();
